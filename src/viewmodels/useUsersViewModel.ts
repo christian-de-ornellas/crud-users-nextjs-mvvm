@@ -11,12 +11,21 @@ export function useUsersViewModel() {
 
     const deleteMutation = useMutation({
         mutationFn: userService.delete,
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['users'] })
+        },
     })
+
+    const deleteUserWithConfirmation = (id: string) => {
+        const confirmed = window.confirm('Tem certeza que deseja excluir este usuário?')
+        if (confirmed) {
+            deleteMutation.mutate(id)
+        }
+    }
 
     return {
         users,
         isLoading,
-        deleteUser: deleteMutation.mutate
+        deleteUser: deleteUserWithConfirmation,
     }
 }
