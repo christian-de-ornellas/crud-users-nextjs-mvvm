@@ -36,16 +36,17 @@ Este é o frontend de um sistema de usuários desenvolvido com [Next.js](https:/
 ├── .env                       # Variáveis de ambiente
 └── ...
 
+```
+
 🧠 Arquitetura MVVM
-	•	Model: camada de comunicação com a API (userService.ts)
-	•	ViewModel: manipula a lógica da view (useUsersViewModel.ts)
-	•	View: componentes React que exibem os dados
+	- Model: camada de comunicação com a API (userService.ts)
+	- ViewModel: manipula a lógica da view (useUsersViewModel.ts)
+	- View: componentes React que exibem os dados
 
 ⸻
 
-🔧 Instalação e Execução
 
-```
+🔧 Instalação e Execução
 
 1.Clone o repositório:
 
