@@ -1,0 +1,5 @@
+# Ambiente geral
+NODE_ENV=development
+
+# Base URL da API (exemplo)
+NEXT_PUBLIC_API_URL=http://localhost:3000
