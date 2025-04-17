@@ -1,31 +1,52 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { userSchema, UserFormSchema } from '@/models/userSchema'
+import React from "react";
 
-export function UserForm({ onSubmit, initialData }: { onSubmit: (data: any) => void, initialData?: any }) {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+export function UserForm({
+                             onSubmit,
+                             initialData,
+                         }: {
+    onSubmit: (data: UserFormSchema) => void
+    initialData?: UserFormSchema
+}) {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<UserFormSchema>({
+        resolver: zodResolver(userSchema),
+        defaultValues: {
+            name: '',
+            email: '',
+        },
+    })
 
-    useEffect(() => {
-        if (initialData) {
-            setName(initialData.name)
-            setEmail(initialData.email)
-        }
-    }, [initialData])
+
+    React.useEffect(() => {
+        if (initialData) reset(initialData)
+    }, [initialData, reset])
 
     return (
-        <form onSubmit={e => { e.preventDefault(); onSubmit({ name, email }) }} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-                <Label>Nome</Label>
-                <Input value={name} onChange={e => setName(e.target.value)} required />
+                <Label htmlFor="name">Nome</Label>
+                <Input id="name" {...register('name')} />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
+
             <div>
-                <Label>Email</Label>
-                <Input value={email} onChange={e => setEmail(e.target.value)} required />
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" {...register('email')} />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
+
             <Button type="submit">Salvar</Button>
         </form>
     )
