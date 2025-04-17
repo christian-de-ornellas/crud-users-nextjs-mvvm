@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { User } from './user'
 
-const api = axios.create({ baseURL: 'http://localhost:3000' })
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const api = axios.create({ baseURL: apiUrl })
 
 export const userService = {
     getAll: () => api.get<User[]>('/users').then(res => res.data),
