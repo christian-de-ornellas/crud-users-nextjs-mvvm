@@ -2,6 +2,8 @@
 
 Este é o frontend de um sistema de usuários desenvolvido com [Next.js](https://nextjs.org), utilizando arquitetura **MVVM**, **React Query**, **Tailwind CSS** e **React Hook Form com Zod** para validações.
 
+![Tela Inicial do Sistema de Usuários](./public/image-2.png)
+![Tela Inicial de Lista do Sistema de Usuários](./public/image-1.png)
 ---
 
 ## 🚀 Tecnologias Utilizadas
